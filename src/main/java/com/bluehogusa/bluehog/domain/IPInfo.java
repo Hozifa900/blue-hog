@@ -2,24 +2,24 @@ package com.bluehogusa.bluehog.domain;
 
 public class IPInfo {
     private String country;
-    private String state;
+    private String region;
     private String city;
 
     public String getCountry() {
         return country;
     }
 
-    public String getState() {
-        return state;
+    public String getRegion() {
+        return region;
     }
 
-    public String getCuty() {
+    public String getCity() {
         return city;
     }
 
     @Override
     public String toString() {
-        return "country:" + country + " state: " + state + " city: " + city;
+        return "country:" + country + " region: " + region + " city: " + city;
 
     }
 }

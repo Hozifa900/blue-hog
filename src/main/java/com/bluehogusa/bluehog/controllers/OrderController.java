@@ -31,11 +31,13 @@ public class OrderController {
     @GetMapping("")
     public ResponseEntity<?> getOrders(HttpServletRequest request) {
         try {
-            String userIP = request.getRemoteAddr();
+            String userIP = "69.132.189.117";
+            // request.getRemoteAddr();
             System.out.println(userIP);
             // Make request to ipapi API
             String apiUrl = "https://ipapi.co/" + userIP + "/json/";
             RestTemplate restTemplate = new RestTemplate();
+            System.out.println(restTemplate.getForObject(apiUrl, IPInfo.class));
             IPInfo data = restTemplate.getForObject(apiUrl, IPInfo.class);
             System.out.println(data);
         } catch (Exception e) {
