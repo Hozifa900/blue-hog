@@ -1,6 +1,7 @@
 package com.bluehogusa.bluehog.domain;
 
 public class IPInfo {
+    private String id;
     private String country;
     private String region;
     private String city;
