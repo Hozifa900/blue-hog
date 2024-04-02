@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.catalina.connector.Response;
-import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-import com.bluehogusa.bluehog.domain.IPInfo;
 import com.bluehogusa.bluehog.domain.Statistics;
 import com.bluehogusa.bluehog.services.IpInfoService;
 import com.bluehogusa.bluehog.services.StatisticsService;
@@ -26,21 +29,29 @@ public class StatisticsController {
     private StatisticsService statisticsService;
     @Autowired
     private IpInfoService ipInfoService;
+
     @GetMapping("")
-    public ResponseEntity<?> getStatistics(HttpServletRequest request) {
-         try {
+    public ResponseEntity<?> getStatistics(HttpServletRequest request, @RequestBody String action) {
+        try {
+
             String userIP = request.getRemoteAddr();
-            IPInfo ipInfo = ipInfoService.getIpInfo(userIP).get();
-            System.out.println(ipInfo);
+            String apiUrl = "https://ipapi.co/69.18.37.194/json/";
+
+            RestTemplate restTemplate = new RestTemplate();
+            System.out.println("testing");
+            System.out.println(restTemplate.getForObject(apiUrl, Statistics.class));
+            Statistics statistics = restTemplate.getForObject(apiUrl, Statistics.class);
+            statistics.setAction(action);
+            statistics.setIp(userIP);
+            statisticsService.saveStatistics(statistics);
             // Use ipInfo as needed
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Internal server error");
         }
         List<Statistics> statisticsList = statisticsService.getAllStatistics();
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
-        response.put("message", "Statistics fetched successfully");
+        response.put("message", "Statistics saved successfully");
         response.put("status", Response.SC_OK);
         response.put("data", statisticsList);
         return new ResponseEntity<>(response, HttpStatus.OK);

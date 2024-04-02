@@ -4,19 +4,20 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.bluehogusa.bluehog.domain.*;
+import com.bluehogusa.bluehog.domain.Statistics;
 import com.bluehogusa.bluehog.repository.StatisticsRepository;
 import com.bluehogusa.bluehog.services.StatisticsService;
 
-
+@Service
 public class StatisticsServiceImpl implements StatisticsService {
-    @Autowired 
+    @Autowired
     private StatisticsRepository statisticsRepository;
 
     @Override
     public List<Statistics> getAllStatistics() {
-       return statisticsRepository.findAll();
+        return statisticsRepository.findAll();
     }
 
     @Override
@@ -26,9 +27,9 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public Optional<Statistics> getStatisticsById(Long id) {
-       Optional<Statistics> statistics = statisticsRepository.findById(id);
-       return statistics;
-     
+        Optional<Statistics> statistics = statisticsRepository.findById(id);
+        return statistics;
+
     }
 
     @Override
@@ -36,5 +37,5 @@ public class StatisticsServiceImpl implements StatisticsService {
         List<Statistics> statistics = statisticsRepository.findByAction(action);
         return statistics;
     }
-    
+
 }

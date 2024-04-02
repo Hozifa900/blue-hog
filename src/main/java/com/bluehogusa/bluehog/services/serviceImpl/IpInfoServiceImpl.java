@@ -3,11 +3,12 @@ package com.bluehogusa.bluehog.services.serviceImpl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bluehogusa.bluehog.domain.IPInfo;
 import com.bluehogusa.bluehog.repository.IpInfoRepository;
 import com.bluehogusa.bluehog.services.IpInfoService;
-
+@Service
 public class IpInfoServiceImpl implements IpInfoService {
     @Autowired
     private IpInfoRepository ipInfoRepository;

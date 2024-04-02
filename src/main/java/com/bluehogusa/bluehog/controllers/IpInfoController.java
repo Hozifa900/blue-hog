@@ -33,6 +33,7 @@ public class IpInfoController {
             System.out.println(restTemplate.getForObject(apiUrl, IPInfo.class));
             IPInfo ipInfo = restTemplate.getForObject(apiUrl, IPInfo.class);
             System.out.println(ipInfo);
+            
             // Process ipInfo as needed
         } catch (Exception e) {
             e.printStackTrace();
