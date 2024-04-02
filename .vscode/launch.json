@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BlueHogApplication<blue-hog>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.bluehogusa.bluehog.BlueHogApplication",
+            "projectName": "blue-hog",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
