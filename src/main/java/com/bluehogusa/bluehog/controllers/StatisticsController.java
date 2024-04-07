@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.bluehogusa.bluehog.domain.IPInfo;
 import com.bluehogusa.bluehog.domain.Statistics;
 import com.bluehogusa.bluehog.services.IpInfoService;
 import com.bluehogusa.bluehog.services.StatisticsService;
@@ -39,8 +40,12 @@ public class StatisticsController {
 
             RestTemplate restTemplate = new RestTemplate();
             System.out.println("testing");
-            System.out.println(restTemplate.getForObject(apiUrl, Statistics.class));
-            Statistics statistics = restTemplate.getForObject(apiUrl, Statistics.class);
+            IPInfo ipInfo = restTemplate.getForObject(apiUrl, IPInfo.class);
+
+            Statistics statistics = new Statistics();
+            statistics.setCity(ipInfo.getCity());
+            statistics.setCountry(ipInfo.getCountry());
+            statistics.setRegion(ipInfo.getRegion());
             statistics.setAction(action);
             statistics.setIp(userIP);
             statisticsService.saveStatistics(statistics);
