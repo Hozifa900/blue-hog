@@ -13,5 +13,6 @@ public interface StatisticsService {
     public Optional<Statistics> getStatisticsById(Long id);
 
     public List<Statistics> getStatisticsByAction(String action);
+    
 
 }
